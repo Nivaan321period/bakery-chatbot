@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, render_template_string
+import os
 
 app = Flask(__name__)
 
@@ -78,4 +79,7 @@ def chat():
     return jsonify({'reply': reply + "Is that all, or do you have more questions?"})
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    # Get the port from the environment variable, default to 5000 for local testing
+    port = int(os.getenv('PORT', 5000))
+    # Ensure the app binds to 0.0.0.0 for external access
+    app.run(host='0.0.0.0', port=port, debug=False)
